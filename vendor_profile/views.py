@@ -4,10 +4,29 @@ from vendor_profile import serializers
 from vendor_profile import models
 
 class VendorListCreateAPIView(generics.ListCreateAPIView):
+    """
+    API endpoint for listing and creating vendors.
+
+    Allows users to list all existing vendors or create a new vendor.
+
+    - GET: Returns a list of all vendors.
+    - POST: Creates a new vendor.
+    """
+    
     queryset = models.Vendor.objects.all()
     serializer_class = serializers.VendorSerializer
 
 class VendorDetailsAPI(generics.RetrieveUpdateDestroyAPIView):
+    """
+    API endpoint for retrieving , updating and deleting vendors.
+
+    Allows users to retrieve vendor details or update existing vendor or delete a vendor.
+
+    - GET: Returns details of a vendors.
+    - PUT: Updates existing vendor.
+    - DELETE: Delete existing vendor.
+    """
+    
     queryset = models.Vendor.objects.all()
     serializer_class = serializers.VendorSerializer
     lookup_field = 'id'
