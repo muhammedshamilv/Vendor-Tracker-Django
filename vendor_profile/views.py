@@ -28,7 +28,7 @@ class VendorDetailsAPI(generics.RetrieveUpdateDestroyAPIView):
     - PUT: Updates existing vendor.
     - DELETE: Delete existing vendor.
     """
-    
+    permission_classes = [IsAuthenticated]
     queryset = models.Vendor.objects.all()
     serializer_class = serializers.VendorSerializer
     lookup_field = 'id'

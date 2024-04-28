@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "vendor_profile",
     "purchase_order",
+    "drf_yasg",
     "rest_framework_simplejwt.token_blacklist"
 ]
 
@@ -55,11 +56,23 @@ MIDDLEWARE = [
 ]
 
 REST_FRAMEWORK = {
+    
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
 }
 
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'Bearer': {
+            'type': 'apiKey',
+            'in': 'header',
+            'name': 'Authorization'
+        }
+    },
+    'USE_SESSION_AUTH': False,
+    'JSON_EDITOR': True,
+}
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=15),
