@@ -2,6 +2,7 @@ from rest_framework.response import Response
 from rest_framework import status, generics
 from vendor_profile import serializers
 from vendor_profile import models
+from rest_framework.permissions import IsAuthenticated
 
 class VendorListCreateAPIView(generics.ListCreateAPIView):
     """
@@ -12,6 +13,7 @@ class VendorListCreateAPIView(generics.ListCreateAPIView):
     - GET: Returns a list of all vendors.
     - POST: Creates a new vendor.
     """
+    permission_classes = [IsAuthenticated]
     
     queryset = models.Vendor.objects.all()
     serializer_class = serializers.VendorSerializer

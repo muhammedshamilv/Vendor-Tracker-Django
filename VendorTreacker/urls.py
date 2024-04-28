@@ -17,9 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from VendorTreacker import views
+from rest_framework_simplejwt.views import TokenRefreshView,TokenObtainPairView
+
 urlpatterns = [
     path("", views.HealthCheck.as_view(), name="health"),
     path("admin/", admin.site.urls),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path("api/token/refresh/", TokenRefreshView.as_view(), name="token-refresh"),
     path("api/vendors/", include('vendor_profile.urls')),
     path("api/purchase_orders/", include('purchase_order.urls')),
 ]

@@ -4,6 +4,7 @@ from purchase_order import models
 import uuid
 from rest_framework.exceptions import ParseError
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 
 class PurchaseOrderListCreateAPIView(generics.ListCreateAPIView):
     """
@@ -15,7 +16,7 @@ class PurchaseOrderListCreateAPIView(generics.ListCreateAPIView):
     - GET: Returns a list of all purchase orders with an option to filter by vendor.
     - POST: Creates a new purchase order.
     """
-
+    permission_classes = [IsAuthenticated]
     serializer_class = serializers.PurchaseOrderSerializer
 
     def get_queryset(self):
@@ -41,7 +42,7 @@ class PurchaseOrderDetailsAPIView(generics.RetrieveUpdateDestroyAPIView):
     - PUT: Updates an existing purchase order.
     - DELETE: Deletes a purchase order.
     """
-
+    permission_classes = [IsAuthenticated]
     queryset = models.PurchaseOrder.objects.all()
     serializer_class = serializers.PurchaseOrderSerializer
     lookup_field = 'id'
