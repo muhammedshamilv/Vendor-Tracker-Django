@@ -45,7 +45,7 @@ python manage.py createsuperuser
 To run test
 
 ```
-pytest
+python manage.py test test
 ```
 
 ### To run the application using Docker :
