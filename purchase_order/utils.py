@@ -15,12 +15,11 @@ def calculate_average_response_time(vendor):
     else:
         average_response_time_minutes = None
 
-    print("average_response_time (minutes)", average_response_time_minutes)
     return average_response_time_minutes
 
 
 def calculate_on_time_delivery_rate(vendor):
-    completed_pos = PurchaseOrder.objects.filter(vendor=vendor, status='completed')
+    completed_pos = PurchaseOrder.objects.filter(vendor=vendor, status='Completed')
     on_time_pos = completed_pos.filter(delivered_date__lte=F('delivery_date'))
     total_completed_pos = completed_pos.count()
 
@@ -32,20 +31,20 @@ def calculate_on_time_delivery_rate(vendor):
     return on_time_delivery_rate
 
 def calculate_quality_rating_average(vendor):
-    completed_pos_with_rating = PurchaseOrder.objects.filter(vendor=vendor, status='completed').exclude(quality_rating=None)
+    completed_pos_with_rating = PurchaseOrder.objects.filter(vendor=vendor, status='Completed').exclude(quality_rating=None)
     total_completed_pos = completed_pos_with_rating.count()
 
     if total_completed_pos > 0:
-        quality_rating_average = completed_pos_with_rating.aggregate(avg_quality_rating=Avg('quality_rating'))['avg_quality_rating']
+        quality_rating_average = completed_pos_with_rating.aggregate(avg_quality_rating=Avg('quality_rating'))
     else:
         quality_rating_average = None
 
-    return quality_rating_average
+    return quality_rating_average["avg_quality_rating"]
 
 
 def calculate_fulfillment_rate(vendor):
     total_pos = PurchaseOrder.objects.filter(vendor=vendor)
-    completed_pos = total_pos.filter(status='completed')
+    completed_pos = total_pos.filter(status='Completed')
     fulfilled_pos = completed_pos.exclude(issues__isnull=False)
 
     total_pos_count = total_pos.count()

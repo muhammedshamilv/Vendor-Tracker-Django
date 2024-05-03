@@ -15,7 +15,7 @@ class PurchaseOrderListCreateAPIView(generics.ListCreateAPIView):
     Allows users to list all purchase orders with an option to filter by vendor,
     or create a new purchase order.
 
-    - GET: Returns a list of all purchase orders with an option to filter by vendor.
+    - GET: Returns a list of all purchase orders with an option to filter by vendor as query_params example url/?vendor_id=9c0e5573-2ad3-499a-ae67-7ec9aa5f5617.
     - POST: Creates a new purchase order.
     Permissions:
     - IsAuthenticated: Users must be authenticated to access this endpoint.
